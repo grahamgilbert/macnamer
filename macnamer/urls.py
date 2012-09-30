@@ -6,7 +6,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'macnamer.views.home', name='home'),
+    url(r'^$', 'namer.views.home', name='home'),
     # url(r'^macnamer/', include('macnamer.foo.urls')),
     url(r'^login/$', 'django.contrib.auth.views.login'),
     url(r'^logout/$', 'django.contrib.auth.views.logout_then_login'),
