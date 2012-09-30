@@ -54,13 +54,7 @@
   			  	<li><a href="{% url auth_logout %}">{% trans "Log out" %}</a></li>
   			  </ul>
   			</li>
-  			{% else %}
-              <form method="post" action="{% url auth_login %}" class="navbar-form pull-right">
-                {% csrf_token %}
-  			  <input class="span2" type="text" placeholder="Username" name="username">
-                <input class="span2" type="password" name="password" placeholder="Password">
-                <button type="submit" class="btn">Sign in</button>
-              </form>
+  			
   			{% endif %}
 			  </div>
             </ul>
