@@ -14,6 +14,7 @@ class ComputerGroup(models.Model):
     
 class Prefix(models.Model):
     prefix = models.CharField(max_length=200, verbose_name="Computer Name Prefix",blank=True,null=True)
+    domain = models.CharField(max_length=200, verbose_name="Computer Domain",blank=True,null=True)
     computer_group = models.ForeignKey(ComputerGroup)
     def __unicode__(self):
         return self.prefix
