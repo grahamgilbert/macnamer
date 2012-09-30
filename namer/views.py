@@ -7,5 +7,5 @@ from models import *
 
 @login_required 
 def index(request):
-    c = {}
+    c = {'user': request.user,}
     return render_to_response('namer/index.html', c) 
