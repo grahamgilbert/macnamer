@@ -1,0 +1,32 @@
+/* @override http://alpha.saved.io/static/style.css */
+
+h1, h2, h3, h4, h5, h6, h3 a{
+	font-family: 'Lato', "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	font-weight:normal;
+	color: black;
+}
+
+
+.has_alert{
+	background-color: red;
+}
+
+.no_alert{
+	background-color:green;
+}
+
+.has_alert, .no_alert{
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	padding: 10px;
+	margin-bottom:15px;
+}
+
+.has_alert h3, .no_alert h3{
+	padding:0;
+	margin: 0;
+}
+
+h3 a:hover{
+	color: whitesmoke;
+}
