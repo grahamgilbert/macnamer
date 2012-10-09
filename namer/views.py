@@ -39,7 +39,7 @@ def new_computer_group(request):
             new_computer_group.save()
             return redirect('namer.views.show_group', new_computer_group.id)
     else:
-        form = ComputerGroupForm(request.user)
+        form = ComputerGroupForm()
         #form.group.queryset = Group.objects.filter(organisation=organisation.id)
     c = {'form': form, 'user': request.user,}
     return render_to_response('forms/new_computer_group.html', c, context_instance=RequestContext(request))
