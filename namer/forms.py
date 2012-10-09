@@ -4,4 +4,4 @@ from models import *
 class ComputerGroupForm(forms.ModelForm):
     class Meta:
         model = ComputerGroup
-        fields = ('name',)
+        fields = ('name','prefix','domain',)

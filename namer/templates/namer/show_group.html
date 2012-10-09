@@ -17,6 +17,10 @@
 
 {% endblock %}
 
+{% block nav %}
+<li><a href="{% url edit_computer_group group.id %}">Edit Group</a></li>
+{% endblock %}
+
 {% block content %}
 
 <table class='computerlist table table-striped table-condensed'>

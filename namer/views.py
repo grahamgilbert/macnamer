@@ -41,15 +41,25 @@ def new_computer_group(request):
             return redirect('namer.views.show_group', new_computer_group.id)
     else:
         form = ComputerGroupForm()
-        #form.group.queryset = Group.objects.filter(organisation=organisation.id)
     c = {'form': form,}
     return render_to_response('forms/new_computer_group.html', c, context_instance=RequestContext(request))
 
 #edit computer group
-
-#new prefix
-
-#edit prefix
+@login_required
+def edit_computer_group(request, group_id):
+    group = get_object_or_404(ComputerGroup, pk=group_id)
+    c = {}
+    c.update(csrf(request))
+    if request.method == 'POST':
+        form = ComputerGroupForm(request.POST, instance=group)
+        if form.is_valid():
+            new_computer_group = form.save(commit=False)
+            new_computer_group.save()
+            return redirect('namer.views.show_group', new_computer_group.id)
+    else:
+        form = ComputerGroupForm(instance=grpup)
+    c = {'form': form,}
+    return render_to_response('forms/new_computer_group.html', c, context_instance=RequestContext(request))
 
 #new computer
 
