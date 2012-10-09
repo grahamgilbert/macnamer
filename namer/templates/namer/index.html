@@ -31,7 +31,7 @@
     </thead>
     <tbody>
         {% for group in groups.all %}
-        <tr><td><a href="{% url show_computer_group group.id %}">{{ group.name }}</a></td></tr>
+        <tr><td><a href="{% url show_group group.id %}">{{ group.name }}</a></td></tr>
         {% endfor %}
     </tbody>
 </table>
