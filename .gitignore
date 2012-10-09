@@ -3,4 +3,4 @@
 *.pyc
 local_settings.py
 
-macnamer/macnamer.db
+*.db
