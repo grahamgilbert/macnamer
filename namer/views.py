@@ -72,7 +72,7 @@ def new_computer(request, group_id):
         if group.prefix:
             maximum_name = Computer.objects.filter(computergroup=group.id).order_by('-name')[:1]
             try:
-                initial_name = int(maximum_name.name)+1
+                initial_name = int(maximum_name[0].name)+1
             except TypeError:
                 initial_name = ""
         else:
