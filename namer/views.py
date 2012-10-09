@@ -4,8 +4,10 @@ from django.contrib.auth.decorators import login_required
 from django.core.context_processors import csrf
 from models import *
 from forms import *
+from django.template import RequestContext
+from django.contrib.auth.models import Permission
+from django.core.urlresolvers import reverse
 # Create your views here.
-#test
 
 @login_required 
 def index(request):
