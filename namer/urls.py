@@ -8,6 +8,7 @@ urlpatterns = patterns('namer.views',
     #edit group
     url(r'^group/edit/(?P<group_id>.+)/', 'edit_computer_group', name='edit_computer_group'),
     #new comouter
+    url(r'^computer/new/(?P<group_id>.+)/', 'new_computer', name='new_computer'),
     #edit computer
     #show group
     url(r'^group/show/(?P<group_id>.+)/', 'show_group', name='show_group'),
