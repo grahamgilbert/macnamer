@@ -3,16 +3,14 @@
 
 {% block script %}
 <script type="text/javascript" charset="utf-8">
-    $(document).ready(function() {
-        $('.grouplist').dataTable({
-            "sDom": "<'row'<'span1'l><'span1'f>r>t<'row'<'span1'i><'span1'p>>",
-            "iDisplayLength": 20,
-            "aLengthMenu": [[20, 50, -1], [20, 50, "All"]],
-            "sPaginationType": "bootstrap",
-            "bStateSave": true,
-            "aaSorting": [1],
-        });
-    } );
+$(document).ready(function() {
+	$('.groupList').dataTable( {
+		"sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
+		"sPaginationType": "bootstrap",
+		"oLanguage": {
+			"sLengthMenu": "_MENU_ records per page"
+		}
+	} );
 </script>
 {% endblock %}
 
@@ -22,11 +20,10 @@
 
 {% block content %}
 
-<table class="grouplist table table-striped table-condensed">
+<table class="groupList table table-striped table-condensed">
     <thead>
         <tr>
           <th>Group</th>
-        </tr>
         </tr>
     </thead>
     <tbody>
