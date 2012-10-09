@@ -3,7 +3,7 @@
 {% load bootstrap_toolkit %}
 {% block content %}
 <h1>New Computer</h1>
-
+{{ max_name }}
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
     <form action="{% url new_computer group.id %}" method="post">{% csrf_token %}
