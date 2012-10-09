@@ -4,12 +4,14 @@ urlpatterns = patterns('namer.views',
     #front. page
     url(r'^$', 'index'),
     #new group
+    url(r'^group/new/', 'namer.views.new_computer_group', name='new_computer_group'),
     #new prefix
     #edit group
     #edit prefix
     #new comouter
     #edit computer
     #show group
+    url(r'^group/show/(?P<group_id>.+)/', 'namer.views.show_group', name='show_group'),
     #show computer
     #get json info
     #url(r'^new$', 'new'),
