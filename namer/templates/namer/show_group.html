@@ -36,9 +36,9 @@
         <tr>
             <td>
                 {% if group.prefix %}
-                {{group.prefix}} {{ computer.name|leading_zeros:"5" }}
+                {{group.prefix}} {{ computer.name|leading_zeros:length }}
                 {% else %}
-                {{ computer.name|leading_zeros:"5" }}
+                {{ computer.name }}
                 {% endif %}
             </td>
     

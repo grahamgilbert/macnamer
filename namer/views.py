@@ -88,5 +88,11 @@ def new_computer(request, group_id):
 def show_group(request, group_id):
     group = get_object_or_404(ComputerGroup, pk=group_id)
     computers = group.computer_set.all()
-    c = { 'user': request.user, 'group':group, 'computers':computers, }
+    ##need to get the longest number.
+    length = 0
+    for computer in computers:
+        this_length = len(computer.name)
+        if this_length > length:
+            length = this_length
+    c = { 'user': request.user, 'group':group, 'computers':computers, 'length':length, }
     return render_to_response('namer/show_group.html', c, context_instance=RequestContext(request))
