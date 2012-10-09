@@ -33,7 +33,7 @@ def new_computer_group(request):
     c = {}
     c.update(csrf(request))
     if request.method == 'POST':
-        form = ComputerGroupForm(request.user, request.POST)
+        form = ComputerGroupForm(request.POST)
         if form.is_valid():
             new_computer_group = form.save(commit=False)
             new_computer_group.save()
