@@ -72,12 +72,12 @@ def new_computer(request, group_id):
         if group.prefix:
             max_name = group.computer_set.all().aggregate(Max('name'))
             try:
-                initial_name = max_name+1
+                initial_name = int(max_name)+1
             except TypeError:
                 initial_name = ""
         else:
             initial_name = ""
-        form = ComputerForm(initial={'name': 'wee'})
+        form = ComputerForm(initial={'name': initial_name})
     c = {'form': form, 'group':group, }
     return render_to_response('forms/new_computer.html', c, context_instance=RequestContext(request))
 
