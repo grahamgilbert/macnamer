@@ -1,5 +1,5 @@
 from django.db import models
-#from django.contrib.auth.models import User
+from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 #import datetime
 # Create your models here.
@@ -21,7 +21,7 @@ class Prefix(models.Model):
         
 def create_prefix(sender, instance, created, **kwargs):
     if created:
-        Prefix.objects.create(user=instance)
+        Prefix.objects.create(prefix=instance)
 #only oneprefix per group for now, so this will handle the creating of eachone
 post_save.connect(create_prefix, sender=ComputerGroup)
 
