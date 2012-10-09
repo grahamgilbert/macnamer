@@ -87,5 +87,6 @@ def new_computer(request, group_id):
 @login_required
 def show_group(request, group_id):
     group = get_object_or_404(ComputerGroup, pk=group_id)
-    c = { 'user': request.user, 'group':group }
+    computers = group.computer_set.all()
+    c = { 'user': request.user, 'group':group, 'computers':computers, }
     return render_to_response('namer/show_group.html', c, context_instance=RequestContext(request))
