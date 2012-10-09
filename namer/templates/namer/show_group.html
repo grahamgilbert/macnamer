@@ -23,7 +23,6 @@
 {% endblock %}
 
 {% block content %}
-Count: {{ group.name }}
 <table class='computerlist table table-striped table-condensed'>
     <thead>
         <tr>
@@ -33,7 +32,13 @@ Count: {{ group.name }}
     </thead>
     <tbody>
         {% for computer in group.computer_set.all %}
-        <tr><td>{{ computer.name }}</td></tr>
+        <tr><td>
+            {% if group.prefix %}
+            {{group.prefix}} {{ computer.name }}
+            {% else %}
+            {{ computer.name }}
+            {% endif %}
+        </td></tr>
         {% endfor %}
     </tbody>
 </table>
