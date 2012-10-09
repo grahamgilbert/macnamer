@@ -21,14 +21,14 @@
 <table class='computerlist table table-striped table-condensed'>
     <thead>
         <tr>
-          <th>Machine   </th>
-          <th>User      </th>
-          <th>IP        </th>
-          <th>Latest Run</th>
+          <th>Client</th>
         </tr>
         </tr>
     </thead>
     <tbody>
+        {% for computer in group.computer_list.all %}
+        <tr><td>{{ computer.name }}</td></tr>
+        {% endfor %}
     </tbody>
 </table>
 
