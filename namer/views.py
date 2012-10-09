@@ -82,7 +82,20 @@ def new_computer(request, group_id):
     return render_to_response('forms/new_computer.html', c, context_instance=RequestContext(request))
 
 #edit computer
-
+def edit_computer(request, computer_id):
+    computer = get_object_or_404(Computer, pk=computer_id)
+    
+    c = {}
+    c.update(csrf(request))
+    if request.method == 'POST':
+        form = ComputerForm(request.POST, instance=computer)
+        if form.is_valid():
+            the_computer = form.save()
+            return redirect('namer.views.show_group', computer.group.id)
+    else:
+        form = ComputerForm(instance=computer)
+    c = {'form': form, 'group':group, }
+    return render_to_response('forms/edit_computer.html', c, context_instance=RequestContext(request))
 #show computer group
 @login_required
 def show_group(request, group_id):
