@@ -16,12 +16,16 @@
 </script>
 {% endblock %}
 
+{% block nav %}
+<li><a href="{% url new_computer_group %}">New Computer Group</a></li>
+{% endblock %}
+
 {% block content %}
 
 <table class='grouplist table table-striped table-condensed'>
     <thead>
         <tr>
-          <th>Client</th>
+          <th>Group</th>
         </tr>
         </tr>
     </thead>
