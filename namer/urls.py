@@ -2,7 +2,7 @@ from django.conf.urls.defaults import *
 
 urlpatterns = patterns('namer.views',
     #front. page
-    url(r'^$', 'index'),
+    url(r'^$', 'index', name='home'),
     #new group
     url(r'^group/new/', 'new_computer_group', name='new_computer_group'),
     #edit group
