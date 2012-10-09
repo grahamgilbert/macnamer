@@ -41,7 +41,7 @@ def new_computer_group(request):
     else:
         form = ComputerGroupForm()
         #form.group.queryset = Group.objects.filter(organisation=organisation.id)
-    c = {'form': form, 'user': request.user,}
+    c = {'form': form,}
     return render_to_response('forms/new_computer_group.html', c, context_instance=RequestContext(request))
 
 #edit computer group
