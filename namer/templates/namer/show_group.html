@@ -36,9 +36,9 @@
         <tr>
             <td>
                 {% if group.prefix %}
-                {{group.prefix}} {{ computer.name|stringformat:"04i" }}
+                {{group.prefix}} {{ computer.name|stringformat:"04d" }}
                 {% else %}
-                {{ computer.name|stringformat:"04i" }}
+                {{ computer.name|stringformat:"04d" }}
                 {% endif %}
             </td>
     
