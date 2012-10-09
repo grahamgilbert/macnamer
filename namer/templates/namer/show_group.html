@@ -36,9 +36,9 @@
         <tr>
             <td>
                 {% if group.prefix %}
-                <a href="{{ url edit_computer computer.id }}">{{group.prefix}} {{ computer.name|leading_zeros:length }}</a>
+                <a href="{% url edit_computer computer.id %}">{{group.prefix}} {{ computer.name|leading_zeros:length }}</a>
                 {% else %}
-                <a href="{{ url edit_computer computer.id }}">{{ computer.name }}</a>
+                <a href="{% url edit_computer computer.id %}">{{ computer.name }}</a>
                 {% endif %}
             </td>
     
