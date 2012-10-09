@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
-
+{% load leading_zeros %}
 {% block script %}
 <script type="text/javascript" charset="utf-8">
     $(document).ready(function() {
@@ -36,9 +36,9 @@
         <tr>
             <td>
                 {% if group.prefix %}
-                {{group.prefix}} {{ computer.name }}
+                {{group.prefix}} {{ computer.name|leading_zeros:"5" }}
                 {% else %}
-                {{ computer.name }}
+                {{ computer.name|leading_zeros:"5" }}
                 {% endif %}
             </td>
     
