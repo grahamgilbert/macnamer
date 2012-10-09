@@ -53,13 +53,13 @@ def edit_computer_group(request, group_id):
     if request.method == 'POST':
         form = ComputerGroupForm(request.POST, instance=group)
         if form.is_valid():
-            new_computer_group = form.save(commit=False)
-            new_computer_group.save()
-            return redirect('namer.views.show_group', new_computer_group.id)
+            the_group = form.save()
+            #new_computer_group.save()
+            return redirect('namer.views.show_group', the_group.id)
     else:
         form = ComputerGroupForm(instance=group)
-    c = {'form': form,}
-    return render_to_response('forms/new_computer_group.html', c, context_instance=RequestContext(request))
+    c = {'form': form, 'group':group, }
+    return render_to_response('forms/edit_computer_group.html', c, context_instance=RequestContext(request))
 
 #new computer
 
