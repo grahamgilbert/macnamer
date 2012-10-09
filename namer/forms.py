@@ -8,5 +8,5 @@ class ComputerGroupForm(forms.ModelForm):
 
 class ComputerForm(forms.ModelForm):
     class Meta:
-        model = ComputerGroup
+        model = Computer
         fields = ('name','serial',)
