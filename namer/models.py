@@ -21,7 +21,7 @@ class Prefix(models.Model):
         
 def create_prefix(sender, instance, created, **kwargs):
     if created:
-        Prefix.objects.create(prefix=instance)
+        Prefix.objects.create(ComputerGroup=instance)
 #only oneprefix per group for now, so this will handle the creating of eachone
 post_save.connect(create_prefix, sender=ComputerGroup)
 
