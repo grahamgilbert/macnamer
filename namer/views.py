@@ -25,7 +25,7 @@ def index(request):
     #show table with computer groups
     groups = ComputerGroup.objects.all()
     c = {'user': request.user, 'groups':groups, }
-    return render_to_response('forms/index.html', c, context_instance=RequestContext(request)) 
+    return render_to_response('namer/index.html', c, context_instance=RequestContext(request)) 
     
     
 #new computer group
