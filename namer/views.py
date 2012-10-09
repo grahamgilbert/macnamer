@@ -91,10 +91,10 @@ def edit_computer(request, computer_id):
         form = ComputerForm(request.POST, instance=computer)
         if form.is_valid():
             the_computer = form.save()
-            return redirect('namer.views.show_group', computer.group.id)
+            return redirect('namer.views.show_group', computer.computergroup.id)
     else:
         form = ComputerForm(instance=computer)
-    c = {'form': form, 'group':computer.group, }
+    c = {'form': form, 'group':computer.computergroup, }
     return render_to_response('forms/edit_computer.html', c, context_instance=RequestContext(request))
 #show computer group
 @login_required
