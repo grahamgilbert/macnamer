@@ -57,7 +57,7 @@ def edit_computer_group(request, group_id):
             new_computer_group.save()
             return redirect('namer.views.show_group', new_computer_group.id)
     else:
-        form = ComputerGroupForm(instance=grpup)
+        form = ComputerGroupForm(instance=group)
     c = {'form': form,}
     return render_to_response('forms/new_computer_group.html', c, context_instance=RequestContext(request))
 
