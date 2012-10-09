@@ -3,6 +3,7 @@ from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.core.context_processors import csrf
 from models import *
+from forms import *
 # Create your views here.
 #test
 
