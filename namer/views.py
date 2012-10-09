@@ -1,6 +1,7 @@
 from django.http import HttpResponse
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+from django.core.context_processors import csrf
 from models import *
 # Create your views here.
 #test
