@@ -27,18 +27,23 @@
     <thead>
         <tr>
           <th>Computer Name</th>
+          <th>Serial</th>
         </tr>
         </tr>
     </thead>
     <tbody>
         {% for computer in group.computer_set.all %}
-        <tr><td>
-            {% if group.prefix %}
-            {{group.prefix}} {{ computer.name }}
-            {% else %}
-            {{ computer.name }}
-            {% endif %}
-        </td></tr>
+        <tr>
+            <td>
+                {% if group.prefix %}
+                {{group.prefix}} {{ computer.name }}
+                {% else %}
+                {{ computer.name }}
+                {% endif %}
+            </td>
+    
+            <td>{{ computer.serial }}</td>
+        </tr>
         {% endfor %}
     </tbody>
 </table>
