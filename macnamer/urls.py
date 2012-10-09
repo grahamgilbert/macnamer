@@ -10,11 +10,11 @@ urlpatterns = patterns('',
     # url(r'^macnamer/', include('macnamer.foo.urls')),
     url(r'^login/$', 'django.contrib.auth.views.login'),
     url(r'^logout/$', 'django.contrib.auth.views.logout_then_login'),
-   	url(r'^app/', include('namer.urls')),
+   	url(r'^', include('namer.urls')),
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', 'namer.views.index', name='home'),
+    #url(r'^$', 'namer.views.index', name='home'),
 )
