@@ -18,6 +18,7 @@
 {% endblock %}
 
 {% block nav %}
+<li><a href="{% url new_computer group.id %}">New Computer</a></li>
 <li><a href="{% url edit_computer_group group.id %}">Edit Group</a></li>
 {% endblock %}
 
