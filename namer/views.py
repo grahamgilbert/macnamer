@@ -109,3 +109,19 @@ def show_group(request, group_id):
             length = this_length
     c = { 'user': request.user, 'group':group, 'computers':computers, 'length':length, }
     return render_to_response('namer/show_group.html', c, context_instance=RequestContext(request))
+    
+def checkin(request, serial_num):
+    computer = get_object_or_404(Computer, serial=serial_num)
+    computer.last_checkin = datetime.now()
+    computer.save()
+    group = computer.computergroup
+    
+    computers = group.computer_set.all()
+    ##need to get the longest number.
+    length = 0
+    for the_computer in computers:
+        this_length = len(the_computer.name)
+        if this_length > length:
+            length = this_length
+    c ={'name':computer.name, 'prefix':group.prefix, 'domain':group.domain, 'length':length, }
+    return HttpResponse(json.dumps(c), mimetype="application/json")

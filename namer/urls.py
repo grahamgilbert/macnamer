@@ -13,8 +13,8 @@ urlpatterns = patterns('namer.views',
     url(r'^computer/edit/(?P<computer_id>.+)/', 'edit_computer', name='edit_computer'),
     #show group
     url(r'^group/show/(?P<group_id>.+)/', 'show_group', name='show_group'),
-    #show computer
     #get json info
+    url(r'^checkin/(?P<serial_num>.+)/', 'checkin', name='checkin'),
     #url(r'^new$', 'new'),
     #url(r'^delete/(?P<manifest_name>[^/]+)/$', 'delete'),
     #url(r'^#(?P<manifest_name>.+)/$', 'index'),
