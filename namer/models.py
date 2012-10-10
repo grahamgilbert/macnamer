@@ -18,3 +18,7 @@ class Computer(models.Model):
     name = models.CharField(max_length=200, verbose_name="Computer Name")
     serial = models.CharField(max_length=200, verbose_name="Serial Number", unique=True)
     last_checkin = models.DateTimeField(blank=True,null=True)
+    def __unicode__(self):
+        return self.name
+    class Meta:
+        ordering = ['name']
