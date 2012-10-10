@@ -134,7 +134,7 @@ def delete_computer(request, computer_id):
     return redirect('namer.views.show_group', group_id=group.id)
     
 def checkin(request, serial_num):
-    computer = get_object_or_404(Computer, serial=serial_num)
+    computer = get_object_or_404(Computer, serial__iexact=serial_num)
     computer.last_checkin = datetime.now()
     computer.save()
     group = computer.computergroup
