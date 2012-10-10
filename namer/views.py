@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from django.conf import settings
-from django.contrib.auth.decorators import user_passes_test, login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext, Template, Context
 from django.template.loader import get_template
