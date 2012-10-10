@@ -18,7 +18,7 @@
 {% endblock %}
 
 {% block nav %}
-{% if perms.computergroup.add_computergroup %}
+{% if perms.namer.add_computergroup %}
 <li><a href="{% url new_computer_group %}">New Computer Group</a></li>
 {% endif %}
 {% endblock %}
