@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.contrib.auth.models import Permission
 from django.core.urlresolvers import reverse
+from django.contrib.auth.models import User
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from django.conf import settings
