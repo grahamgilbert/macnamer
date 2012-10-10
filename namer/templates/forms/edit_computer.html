@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load bootstrap_toolkit %}
+{% block nav %}
+<li><a href="#myModal" class="btn btn-danger" data-toggle="modal"><i class="icon-remove icon-white"></i> Computer</a></li>
+{% endblock %}
 {% block content %}
 <h1>Edit Computer</h1>
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
@@ -13,7 +16,7 @@
         </table>
         <p><button type="submit" class="btn primary">Save</button></p>
     </form>
-	<p><a href="#myModal" class="btn btn-danger" data-toggle="modal"><i class="icon-remove icon-white"></i> Computer</a></p>
+	
 	<div class="modal hide fade in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none; ">
 	  <div class="modal-header">
 	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
