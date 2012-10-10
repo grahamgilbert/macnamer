@@ -13,4 +13,18 @@
         </table>
         <p><button type="submit" class="btn primary">Save</button></p>
     </form>
+	<p><a href="#myModal" class="btn btn-danger" data-toggle="modal"><i class="icon-remove icon-white"></i> Server</a></p>
+	<div class="modal hide fade in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none; ">
+	  <div class="modal-header">
+	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	    <h3 id="myModalLabel">Are you sure?</h3>
+	  </div>
+	  <div class="modal-body">
+	    <p>This will delete the computer permanently - are you sure you want to do this?</p>
+	  </div>
+	  <div class="modal-footer">
+	    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+	    <a class="btn btn-danger" href="{% url namer.views.delete_computer computer.id %}">Delete Server</a>
+	  </div>
+	</div>
 {% endblock %}

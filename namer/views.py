@@ -113,6 +113,13 @@ def show_group(request, group_id):
     c = { 'user': request.user, 'group':group, 'computers':computers, 'length':length, }
     return render_to_response('namer/show_group.html', c, context_instance=RequestContext(request))
     
+@login_required
+def delete_computer(request, computer_id):
+    computer = get_object_or_404(Computer, pk=computer_id)
+    group = get_object_or_404(ComputerGroup, pk=computer.computergroup.id)
+    computer.delete()
+    return redirect('namer.views.show_group', group_id=group.id)
+    
 def checkin(request, serial_num):
     computer = get_object_or_404(Computer, serial=serial_num)
     computer.last_checkin = datetime.now()

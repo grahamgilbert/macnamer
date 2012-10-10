@@ -11,6 +11,8 @@ urlpatterns = patterns('namer.views',
     url(r'^computer/new/(?P<group_id>.+)/', 'new_computer', name='new_computer'),
     #edit computer
     url(r'^computer/edit/(?P<computer_id>.+)/', 'edit_computer', name='edit_computer'),
+    #delete computer
+    url(r'^computer/delete/(?P<computer_id>.+)/', 'delete_computer', name='delete_computer'),
     #show group
     url(r'^group/show/(?P<group_id>.+)/', 'show_group', name='show_group'),
     #get json info
