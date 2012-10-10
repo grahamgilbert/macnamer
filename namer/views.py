@@ -13,6 +13,7 @@ from models import *
 from forms import *
 from django.db.models import Q, Max
 from datetime import datetime
+from django.utils import simplejson
 
 # Create your views here.
 
@@ -126,4 +127,4 @@ def checkin(request, serial_num):
         if this_length > length:
             length = this_length
     c ={'name':computer.name, 'prefix':group.prefix, 'domain':group.domain, 'length':length, }
-    return HttpResponse(json.dumps(c), mimetype="application/json")
+    return HttpResponse(simplejson.dumps(c), mimetype="application/json")
