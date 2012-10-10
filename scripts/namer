@@ -13,7 +13,7 @@ import math
 
 
 ##this is the user that we'll be testing for - put your admin user here
-theurl = 'http://namer.pebbleit.com/checkin/'
+theurl = 'http://namer.grahamgilbert.com/checkin/'
 pid = str(os.getpid())
 pidfile = "/tmp/checkin.pid"
 #get the OS version
@@ -63,7 +63,7 @@ else:
         #if there's a prefix, add that to the name
         #set the local hostname
         if prefix:
-            localname = prefix.replace(' ', '-') + name.replace(' ', '-')
+            localname = prefix.replace(' ', '-') + "-" + name.replace(' ', '-')
         else:
             localname = name.replace(' ', '-')
 
@@ -72,7 +72,7 @@ else:
         p = subprocess.Popen(theprocess,shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate()[0]
         #set the bonjour name
         if prefix:
-            theprocess = "scutil --set ComputerName" + " \"" + prefix + "\"" + " \"" +name + "\""
+            theprocess = "scutil --set ComputerName" + " \"" + prefix  + " " +name + "\""
         else:
             theprocess = "scutil --set ComputerName" + " \"" +name + "\""
         p = subprocess.Popen(theprocess,shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate()[0]
