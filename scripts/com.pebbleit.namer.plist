@@ -6,7 +6,7 @@
 	<string>com.pebbleit.namer</string>
 	<key>ProgramArguments</key>
 	<array>
-		<string>/usr/local/pebbleit/namer</string>
+		<string>/usr/local/macnamer/namer</string>
 	</array>
 	<key>RunAtLoad</key>
 	<true/>

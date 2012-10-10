@@ -9,5 +9,5 @@ PAYLOAD=\
 			pack-script-postflight
 
 pack-script: l_usr_local
-		@sudo mkdir -p ${WORK_D}/usr/local/pebbleit/
-		@sudo ${CP} checkin ${WORK_D}/usr/local/pebbleit/namer
+		@sudo mkdir -p ${WORK_D}/usr/local/macnamer/
+		@sudo ${CP} namer ${WORK_D}/usr/local/macnamer/namer
