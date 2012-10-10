@@ -89,7 +89,7 @@ def new_computer(request, group_id):
         else:
             initial_name = ""
         form = ComputerForm(initial={'name': initial_name})
-    c = {'form': form, 'group':group, }
+    c = {'form': form, 'group':group, 'maximum_name':maximum_name, }
     return render_to_response('forms/new_computer.html', c, context_instance=RequestContext(request))
 
 #edit computer
