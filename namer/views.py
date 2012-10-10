@@ -29,7 +29,7 @@ def index(request):
     
 #new computer group
 @login_required
-@permission_required('computergroup.add_computergroup', login_url='/login/')
+@permission_required('namer.add_computergroup', login_url='/login/')
 def new_computer_group(request):
     c = {}
     c.update(csrf(request))
@@ -46,7 +46,7 @@ def new_computer_group(request):
 
 #edit computer group
 @login_required
-@permission_required('computergroup.change_computergroup', login_url='/login/')
+@permission_required('namer.change_computergroup', login_url='/login/')
 def edit_computer_group(request, group_id):
     group = get_object_or_404(ComputerGroup, pk=group_id)
     c = {}
@@ -63,7 +63,7 @@ def edit_computer_group(request, group_id):
 
 #new computer
 @login_required
-@permission_required('computer.add_computer', login_url='/login/')
+@permission_required('namer.add_computer', login_url='/login/')
 def new_computer(request, group_id):
     group = get_object_or_404(ComputerGroup, pk=group_id)
     c = {}
@@ -93,7 +93,7 @@ def new_computer(request, group_id):
 
 #edit computer
 @login_required
-@permission_required('computer.change_computer', login_url='/login/')
+@permission_required('namer.change_computer', login_url='/login/')
 def edit_computer(request, computer_id):
     computer = get_object_or_404(Computer, pk=computer_id)
     
@@ -125,7 +125,7 @@ def show_group(request, group_id):
     return render_to_response('namer/show_group.html', c, context_instance=RequestContext(request))
     
 @login_required
-@permission_required('computer.delete_computer', login_url='/login/')
+@permission_required('namer.delete_computer', login_url='/login/')
 def delete_computer(request, computer_id):
     computer = get_object_or_404(Computer, pk=computer_id)
     group = get_object_or_404(ComputerGroup, pk=computer.computergroup.id)
