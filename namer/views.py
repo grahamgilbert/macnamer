@@ -83,7 +83,7 @@ def new_computer(request, group_id):
             #maximum_name = Computer.objects.filter(computergroup=group.id).order_by('-name')[:1][0]
             maximum_name = Computer.objects.extra(select={'int_name': 'CAST(name AS INTEGER)'},order_by=['-int_name'])[0]
             try:
-                initial_name = int(maximum_name)+1
+                initial_name = int(maximum_name.name)+1
             except TypeError:
                 initial_name = ""
         else:
