@@ -17,4 +17,4 @@ class Computer(models.Model):
     computergroup = models.ForeignKey(ComputerGroup)
     name = models.CharField(max_length=200, verbose_name="Computer Name")
     serial = models.CharField(max_length=200, verbose_name="Serial Number", unique=True)
-    last_checkin = models.DateTimeField()
+    last_checkin = models.DateTimeField(blank=True,null=True)
