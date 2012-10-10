@@ -18,8 +18,12 @@
 {% endblock %}
 
 {% block nav %}
+{% if perms.computer.add_computer %}
 <li><a href="{% url new_computer group.id %}">New Computer</a></li>
+{% endif %}
+{% if perms.computergroup.change_computergroup %}
 <li><a href="{% url edit_computer_group group.id %}">Edit Group</a></li>
+{% endif %}
 {% endblock %}
 
 {% block content %}
@@ -37,9 +41,17 @@
         <tr>
             <td>
                 {% if group.prefix %}
+                {% if perms.computer.change_computer %}
                 <a href="{% url edit_computer computer.id %}">{{group.prefix}} {{ computer.name|leading_zeros:length }}</a>
                 {% else %}
+                {{group.prefix}} {{ computer.name|leading_zeros:length }}
+                {% endif %}
+                {% else %}
+                {% if perms.computer.change_computer %}
                 <a href="{% url edit_computer computer.id %}">{{ computer.name }}</a>
+                {% else %}
+                {{ computer.name }}
+                {% endif %}
                 {% endif %}
             </td>
     
