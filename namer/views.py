@@ -14,6 +14,7 @@ from forms import *
 from django.db.models import Q, Max
 from datetime import datetime
 from django.utils import simplejson
+import re
 
 # Create your views here.
 
@@ -67,6 +68,8 @@ def new_computer(request, group_id):
         form = ComputerForm(request.POST)
         if form.is_valid():
             the_computer = form.save(commit=False)
+            ##strip the leading zeroes
+            the_computer.name = re.sub("^0+","",the_computer.name)
             the_computer.computergroup = group
             the_computer.save()
             return redirect('namer.views.show_group', group.id)
@@ -93,7 +96,9 @@ def edit_computer(request, computer_id):
     if request.method == 'POST':
         form = ComputerForm(request.POST, instance=computer)
         if form.is_valid():
-            the_computer = form.save()
+            the_computer = form.save(commit=False)
+            the_computer.name = re.sub("^0+","",the_computer.name)
+            the_computer.save()
             return redirect('namer.views.show_group', computer.computergroup.id)
     else:
         form = ComputerForm(instance=computer)
