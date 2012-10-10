@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load bootstrap_toolkit %}
 {% block nav %}
-{% if perms.computer.delete_computer %}
+{% if perms.namer.delete_computer %}
 <li><a href="#myModal" data-toggle="modal"><i class="icon-remove icon-white"></i> Computer</a></li>
 {% endif %}
 {% endblock %}
