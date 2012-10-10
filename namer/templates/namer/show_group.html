@@ -28,6 +28,7 @@
         <tr>
           <th>Computer Name</th>
           <th>Serial</th>
+          <th>Last Seen</th>
         </tr>
         </tr>
     </thead>
@@ -43,6 +44,7 @@
             </td>
     
             <td>{{ computer.serial }}</td>
+            <td>{{ computer.last_checkin }}</td>
         </tr>
         {% endfor %}
     </tbody>
