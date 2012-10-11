@@ -11,7 +11,14 @@ import shlex
 import shutil
 import math
 
-theurl = 'http://namer.grahamgilbert.com/checkin/'
+#put your server in here
+yourserver = 'http://macnamer.example.com
+
+
+##############
+##STOP EDITING
+##############
+theurl = yourserver+'/checkin/'
 pid = str(os.getpid())
 pidfile = "/tmp/checkin.pid"
 
