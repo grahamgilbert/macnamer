@@ -2,4 +2,4 @@
 
 launchctl load -w /Library/LaunchDaemons/com.pebbleit.namer.plist
 
-#/usr/local/pebbleit/checkin
+/usr/local/macnamer/namer
