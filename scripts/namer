@@ -12,7 +12,7 @@ import shutil
 import math
 
 #put your server in here
-yourserver = 'http://macnamer.example.com
+yourserver = 'http://macnamer.pebbleit.com'
 
 
 ##############
