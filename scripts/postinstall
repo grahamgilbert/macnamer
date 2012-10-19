@@ -1,5 +1,0 @@
-#!/bin/bash
-
-launchctl load -w /Library/LaunchDaemons/com.pebbleit.namer.plist
-
-/usr/local/macnamer/namer
