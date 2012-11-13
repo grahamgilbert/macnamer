@@ -81,7 +81,7 @@ def new_computer(request, group_id):
     ##is there a prefix set? If so, get the highest number and add one and pre-populate the form with it.
         if group.prefix:
             #maximum_name = Computer.objects.filter(computergroup=group.id).order_by('-name')[:1][0]
-            maximum_name = Computer.objects.extra(select={'int_name': 'CAST(name AS INTEGER)'},where=["group_id=group.id"],order_by=['-int_name'])[0]
+            maximum_name = Computer.objects.extra(select={'int_name': 'SELECT * FROM computer CAST(name AS INTEGER) WHERE computer.group_id = group.id'},where=["group_id=group.id"],order_by=['-int_name'])[0]
             try:
                 initial_name = int(maximum_name.name)+1
             except TypeError:
