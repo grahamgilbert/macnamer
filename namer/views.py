@@ -88,7 +88,7 @@ def new_computer(request, group_id):
             #maximum_name = the_computers.extra(select={'int_name': 'CAST(name AS INTEGER)'},order_by=['-int_name'])[0]
             #for the_computers as computer:
                 ##computer name
-            if maximum_name = 0:
+            if maximum_name == 0:
                 the_value = maximum_name
             else:
                 the_value = maximum_name.name
