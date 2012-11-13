@@ -93,7 +93,7 @@ def new_computer(request, group_id):
             else:
                 the_value = maximum_name.name
             try:
-                initial_name = int(maximum_name.name)+1
+                initial_name = int(the_value)+1
             except TypeError:
                 initial_name = ""
         else:
