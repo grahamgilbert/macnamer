@@ -10,7 +10,6 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext, Template, Context
 from django.template.loader import get_template
 from django.core.context_processors import csrf
-from django.db.models import Max
 from models import *
 from forms import *
 from django.db.models import Q, Max
@@ -82,9 +81,7 @@ def new_computer(request, group_id):
     ##is there a prefix set? If so, get the highest number and add one and pre-populate the form with it.
         if group.prefix:
             #maximum_name = Computer.objects.filter(computergroup=group.id).order_by('-name')[:1][0]
-            #maximum_name = Computer.objects.extra(select={'int_name': 'SELECT * FROM computer CAST(name AS INTEGER) WHERE computer.group_id = group.id'},order_by=['-int_name'])[0]
-            maximum_name = Computer.objects.filter(computergroup=group.id).aggregate(Max('name'))['name__max']
-            #maximum_name = Computer.objects.get(name = maximum_name)
+            maximum_name = Computer.objects.extra(select={'int_name': 'CAST(name AS INTEGER)'},where=["computergroup_id=group.id"],order_by=['-int_name'])[0]
             try:
                 initial_name = int(maximum_name.name)+1
             except TypeError:
