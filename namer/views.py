@@ -81,7 +81,14 @@ def new_computer(request, group_id):
     ##is there a prefix set? If so, get the highest number and add one and pre-populate the form with it.
         if group.prefix:
             try:
-                maximum_name = Computer.objects.filter(computergroup=group.id).order_by('-name')[0]
+                the_computers = Computer.objects.filter(computergroup=group.id).order_by('-name')
+                maximum_name = 0
+                for a_computer in the_computers:
+                    try:
+                        if int(a_computer.name) > int(maximum_name):
+                            maximum_name = a_computer.name
+                    except:
+                        break
             except:
                 maximum_name = 0
             #the_computers = Computer.objects.filter(computergroup=group.id)
@@ -91,7 +98,7 @@ def new_computer(request, group_id):
             if maximum_name == 0:
                 the_value = maximum_name
             else:
-                the_value = maximum_name.name
+                the_value = maximum_name
             try:
                 initial_name = int(the_value)+1
             except TypeError:
