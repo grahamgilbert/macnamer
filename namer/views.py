@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.contrib.auth.models import Permission
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
@@ -18,7 +18,33 @@ from django.utils import simplejson
 import re
 
 # Create your views here.
-
+def next_name(group):
+    ##is there a prefix set? If so, get the highest number and add one and pre-populate the form with it.
+    if group.prefix:
+        try:
+            the_computers = Computer.objects.filter(computergroup=group.id).order_by('-name')
+            maximum_name = 0
+            for a_computer in the_computers:
+                try:
+                    if int(a_computer.name) > int(maximum_name):
+                        maximum_name = a_computer.name
+                except:
+                    break
+        except:
+            maximum_name = 0
+        ##computer name
+        if maximum_name == 0:
+            the_value = maximum_name
+        else:
+            the_value = maximum_name
+        try:
+            initial_name = int(the_value)+1
+        except TypeError:
+            initial_name = ""
+    else:
+        initial_name = ""
+    return initial_name
+    
 @login_required 
 def index(request):
     #show table with computer groups
@@ -78,33 +104,7 @@ def new_computer(request, group_id):
             the_computer.save()
             return redirect('namer.views.show_group', group.id)
     else:
-    ##is there a prefix set? If so, get the highest number and add one and pre-populate the form with it.
-        if group.prefix:
-            try:
-                the_computers = Computer.objects.filter(computergroup=group.id).order_by('-name')
-                maximum_name = 0
-                for a_computer in the_computers:
-                    try:
-                        if int(a_computer.name) > int(maximum_name):
-                            maximum_name = a_computer.name
-                    except:
-                        break
-            except:
-                maximum_name = 0
-            #the_computers = Computer.objects.filter(computergroup=group.id)
-            #maximum_name = the_computers.extra(select={'int_name': 'CAST(name AS INTEGER)'},order_by=['-int_name'])[0]
-            #for the_computers as computer:
-                ##computer name
-            if maximum_name == 0:
-                the_value = maximum_name
-            else:
-                the_value = maximum_name
-            try:
-                initial_name = int(the_value)+1
-            except TypeError:
-                initial_name = ""
-        else:
-            initial_name = ""
+        initial_name = next_name(group)
         form = ComputerForm(initial={'name': initial_name})
     c = {'form': form, 'group':group, }
     return render_to_response('forms/new_computer.html', c, context_instance=RequestContext(request))
@@ -149,9 +149,90 @@ def delete_computer(request, computer_id):
     group = get_object_or_404(ComputerGroup, pk=computer.computergroup.id)
     computer.delete()
     return redirect('namer.views.show_group', group_id=group.id)
+
+#new network
+@login_required
+@permission_required('namer.add_network', login_url='/login/')
+def new_network(request, group_id):
+    group = get_object_or_404(ComputerGroup, pk=group_id)
+    c = {}
+    c.update(csrf(request))
+    if request.method == 'POST':
+        form = NetworkForm(request.POST)
+        if form.is_valid():
+            the_network = form.save(commit=False)
+            the_network.computergroup = group
+            the_network.save()
+            return redirect('namer.views.show_network', group.id)
+    else:
+        form = NetworkForm()
+    c = {'form': form, 'group':group, }
+    return render_to_response('forms/new_network.html', c, context_instance=RequestContext(request))
+
+#edit network
+@login_required
+@permission_required('namer.change_network', login_url='/login/')
+def edit_network(request, network_id):
+    network = get_object_or_404(Network, pk=network_id)
     
-def checkin(request, serial_num):
-    computer = get_object_or_404(Computer, serial__iexact=serial_num)
+    c = {}
+    c.update(csrf(request))
+    if request.method == 'POST':
+        form = NetworkForm(request.POST, instance=network)
+        if form.is_valid():
+            the_network = form.save(commit=False)
+            the_network.save()
+            return redirect('namer.views.show_network', network.computergroup.id)
+    else:
+        form = NetworkForm(instance=network)
+    c = {'form': form, 'group':network.computergroup, 'network':network, }
+    return render_to_response('forms/edit_network.html', c, context_instance=RequestContext(request))
+
+#show network
+@login_required
+def show_network(request, group_id):
+    group = get_object_or_404(ComputerGroup, pk=group_id)
+    networks = group.network_set.all()
+    c = { 'user': request.user, 'group':group, 'networks':networks, }
+    return render_to_response('namer/show_network.html', c, context_instance=RequestContext(request))
+    
+@login_required
+@permission_required('namer.delete_network', login_url='/login/')
+def delete_network(request, network_id):
+    network = get_object_or_404(Network, pk=network_id)
+    group = get_object_or_404(ComputerGroup, pk=network.computergroup.id)
+    network.delete()
+    return redirect('namer.views.show_network', group_id=group.id)
+    
+@csrf_exempt
+def checkin(request):
+    try:
+        serial_num = request.POST['serial']
+    except:
+        raise Http404
+    try:
+        ip = request.POST['ip']
+    except:
+        raise Http404
+    try:
+        #try to find the computer
+        computer = get_object_or_404(Computer, serial__iexact=serial_num)
+    except:
+        ##we couldn't find the computer, get it's subnet out of the passed ip
+        subnet = ip.rpartition('.')[0] + ".0"
+        ##find if there are any subnets with this IP address
+        try:
+            network = get_object_or_404(Network, network=subnet)
+        except:
+            raise Http404
+        ##get the next name of from the group - if it's not blank carry on
+        new_name = next_name(network.computergroup)
+        if new_name == "":
+            raise Http404
+        else:
+            ##if there are, create a new computer in that group with the serial
+            computer = Computer(name=new_name, serial=serial_num, computergroup=network.computergroup)
+            computer.save()
     computer.last_checkin = datetime.now()
     computer.save()
     group = computer.computergroup
@@ -165,3 +246,4 @@ def checkin(request, serial_num):
             length = this_length
     c ={'name':computer.name, 'prefix':group.prefix, 'domain':group.domain, 'length':length, }
     return HttpResponse(simplejson.dumps(c), mimetype="application/json")
+        

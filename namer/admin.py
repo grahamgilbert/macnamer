@@ -3,4 +3,4 @@ from namer.models import *
     
 admin.site.register(Computer)
 admin.site.register(ComputerGroup)
-#admin.site.register(Prefix)
+admin.site.register(Network)

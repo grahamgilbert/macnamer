@@ -12,6 +12,14 @@ class ComputerGroup(models.Model):
             return self.name
         else:
             return self.id
+            
+class Network(models.Model):
+    network = models.CharField(max_length=200, unique=True)
+    computergroup = models.ForeignKey(ComputerGroup)
+    def __unicode__(self):
+        return self.network
+    class Meta:
+        ordering = ['network']
 
 class Computer(models.Model):
     computergroup = models.ForeignKey(ComputerGroup)

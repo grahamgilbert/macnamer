@@ -10,3 +10,8 @@ class ComputerForm(forms.ModelForm):
     class Meta:
         model = Computer
         fields = ('name','serial',)
+        
+class NetworkForm(forms.ModelForm):
+    class Meta:
+        model = Network
+        fields = ('network',)

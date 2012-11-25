@@ -21,6 +21,7 @@
 {% if perms.namer.add_computer %}
 <li><a href="{% url new_computer group.id %}">New Computer</a></li>
 {% endif %}
+<li><a href="{% url show_network group.id %}">Networks</a></li>
 {% if perms.namer.change_computergroup %}
 <li><a href="{% url edit_computer_group group.id %}">Edit Group</a></li>
 {% endif %}
