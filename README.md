@@ -18,5 +18,7 @@ If you set a prefix for the group, and don't enter anything other than digits in
 ###Networks
 If you assign a network to a group, any new request that comes from that network will be assigned the next available number (if you're using the auto naming functionality). If you don't wish Macs to be automatically added to MacNamer, don't assign any networks to a group.
 
+You should enter the network as the LAN subnet xxx.xxx.xxx.0 (e.g. 192.168.10.0) - there isn't currently any support for subnets other than /24, although you can enter multiple subnets, nor is there any validation currently of the field, so make sure you're entering your desired subnets correctly.
+
 ###Permissions
 You can assign permissions for creating, modifying and deleting to users for groups, computers and networks from within the administration pages. For more information on permissions, please check the [Django documentation](https://docs.djangoproject.com/en/dev/topics/auth/).
