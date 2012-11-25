@@ -3,7 +3,6 @@ include /usr/local/share/luggage/luggage.make
 TITLE=MacNamer
 PACKAGE_NAME=Macnamer
 REVERSE_DOMAIN=com.grahamgilbert
-PACKAGE_TARGET_OS=10.5
 PAYLOAD=\
 			pack-script\
 			pack-Library-LaunchDaemons-com.pebbleit.namer.plist
