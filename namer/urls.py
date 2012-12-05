@@ -25,8 +25,4 @@ urlpatterns = patterns('namer.views',
     url(r'^group/show/(?P<group_id>.+)/', 'show_group', name='show_group'),
     #get json info
     url(r'^checkin/', 'checkin', name='checkin'),
-    #url(r'^new$', 'new'),
-    #url(r'^delete/(?P<manifest_name>[^/]+)/$', 'delete'),
-    #url(r'^#(?P<manifest_name>.+)/$', 'index'),
-    #url(r'^view/(?P<manifest_name>[^/]+)/$', 'view'),
 )
