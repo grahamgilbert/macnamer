@@ -4,10 +4,13 @@ MacNamer is a combination of a Django web app and a companion script to run on y
 ##Why?
 I'm rather OCD about the names of the Macs I look after. I like them to follow the convention of ABC 123 where ABC is a unique identifier for that set of macs and the number increments from 1. MacNamer will also pad the front of the name with the appropriate number of leading zeroes so your ARD lists line up nicely.
 
-##Installation
-* Ubuntu
+##Server installation
+* [Ubuntu](https://github.com/grahamgilbert/macnamer/wiki/Installation-on-Ubuntu)
 * OS X
-* Deploying to Clients
+
+##Deploying to clients
+Installation is simple - install the package using your favourite method, and then set the preference to point to the ServerURL. You can use MCX, Profiles, or plain old defaults write:
+``defaults write /Library/Preferences/com.grahamgilbert.macnamer ServerURL "http://macnamer.yourserver.com"
 
 ##Usage
 MacNamer is divided into groups, and within each group are computers and networks. 

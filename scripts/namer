@@ -12,15 +12,55 @@ import shlex
 import shutil
 import math
 
-#put your server in here
-yourserver = 'http://namer.yourserver.com'
-
-
 #################################################################################################################
-##STOP EDITING
+##No Editing needed!
 #################################################################################################################
+
+BUNDLE_ID = 'com.grahamgilbert.macnamer'
+##This was lifted verbatim from the Munki project - hope Greg doesn't mind!
+
+def set_pref(pref_name, pref_value):
+    """Sets a preference, writing it to
+        /Library/Preferences/com.grahamgilbert.macnamer.plist.
+        This should normally be used only for 'bookkeeping' values;
+        values that control the behavior of munki may be overridden
+        elsewhere (by MCX, for example)"""
+    try:
+        CFPreferencesSetValue(
+                              pref_name, pref_value, BUNDLE_ID,
+                              kCFPreferencesAnyUser, kCFPreferencesCurrentHost)
+        CFPreferencesAppSynchronize(BUNDLE_ID)
+    except Exception:
+        pass
+
+def pref(pref_name):
+    """Return a preference. Since this uses CFPreferencesCopyAppValue,
+    Preferences can be defined several places. Precedence is:
+        - MCX
+        - /var/root/Library/Preferences/ManagedInstalls.plist
+        - /Library/Preferences/ManagedInstalls.plist
+        - default_prefs defined here.
+    """
+    default_prefs = {
+        'ServerURL': 'http://macnamer',
+    }
+    pref_value = CFPreferencesCopyAppValue(pref_name, BUNDLE_ID)
+    if pref_value == None:
+        pref_value = default_prefs.get(pref_name)
+        # we're using a default value. We'll write it out to
+        # /Library/Preferences/<BUNDLE_ID>.plist for admin
+        # discoverability
+        set_pref(pref_name, pref_value)
+    if isinstance(pref_value, NSDate):
+        # convert NSDate/CFDates to strings
+        pref_value = str(pref_value)
+    return pref_value
+
 if not os.geteuid()==0:
     sys.exit("\nOnly root can run this script\n")
+
+yourserver = pref('ServerURL')
+
 theurl = yourserver+'/checkin/'
 pid = str(os.getpid())
 pidfile = "/tmp/checkin.pid"

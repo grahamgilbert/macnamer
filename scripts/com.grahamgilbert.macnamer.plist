@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Label</key>
-	<string>com.pebbleit.namer</string>
+	<string>com.grahamgilbert.macnamer</string>
 	<key>ProgramArguments</key>
 	<array>
 		<string>/usr/local/macnamer/namer</string>
