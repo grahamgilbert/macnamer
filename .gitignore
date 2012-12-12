@@ -2,7 +2,6 @@
 *.pot
 *.pyc
 local_settings.py
-*.pkg
 *.db
 macnamer.db
 macnamer/settings.py
