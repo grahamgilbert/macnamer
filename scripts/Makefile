@@ -1,8 +1,10 @@
 include /usr/local/share/luggage/luggage.make
 
 TITLE=MacNamer
-PACKAGE_NAME=Macnamer
+PACKAGE_NAME=MacNamer
 REVERSE_DOMAIN=com.grahamgilbert
+PACKAGE_TARGET_OS=10.5
+PLIST_FLAVOR=pkg-info
 PAYLOAD=\
 			pack-script\
 			pack-Library-LaunchDaemons-com.grahamgilbert.macnamer.plist\

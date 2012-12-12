@@ -5,12 +5,13 @@ import platform
 from urllib2 import Request, urlopen, URLError, HTTPError
 import urllib
 import json
-import os, sys, Foundation
+import os, sys
 import re
 import string
 import shlex
 import shutil
 import math
+from Foundation import *
 
 #################################################################################################################
 ##No Editing needed!

@@ -10,7 +10,8 @@ I'm rather OCD about the names of the Macs I look after. I like them to follow t
 
 ##Deploying to clients
 Installation is simple - install the package using your favourite method, and then set the preference to point to the ServerURL. You can use MCX, Profiles, or plain old defaults write:
-``defaults write /Library/Preferences/com.grahamgilbert.macnamer ServerURL "http://macnamer.yourserver.com"
+
+	defaults write /Library/Preferences/com.grahamgilbert.macnamer ServerURL "http://macnamer.yourserver.com"
 
 ##Usage
 MacNamer is divided into groups, and within each group are computers and networks. 
