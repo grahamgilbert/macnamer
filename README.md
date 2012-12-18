@@ -26,3 +26,6 @@ You should enter the network as the LAN subnet xxx.xxx.xxx.0 (e.g. 192.168.10.0)
 
 ###Permissions
 You can assign permissions for creating, modifying and deleting to users for groups, computers and networks from within the administration pages. For more information on permissions, please check the [Django documentation](https://docs.djangoproject.com/en/dev/topics/auth/).
+
+##Acknowledgements
+Many thanks for my lovely employers at [pebble.it](http://pebbleit.com) for letting me release this.
