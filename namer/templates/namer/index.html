@@ -19,7 +19,7 @@
 
 {% block nav %}
 {% if perms.namer.add_computergroup %}
-<li><a href="{% url new_computer_group %}">New Computer Group</a></li>
+<li><a href="{% url 'new_computer_group' %}">New Computer Group</a></li>
 {% endif %}
 {% endblock %}
 
@@ -32,7 +32,7 @@
     </thead>
     <tbody>
         {% for group in groups.all %}
-        <tr><td><a href="{% url show_group group.id %}">{{ group.name }}</a></td></tr>
+        <tr><td><a href="{% url 'show_group' group.id %}">{{ group.name }}</a></td></tr>
         {% endfor %}
     </tbody>
 </table>

@@ -19,9 +19,9 @@
 
 {% block nav %}
 {% if perms.namer.add_network %}
-<li><a href="{% url new_network group.id %}">New Network</a></li>
+<li><a href="{% url 'new_network' group.id %}">New Network</a></li>
 {% endif %}
-<li><a href="{% url show_group group.id %}">Back to Group</a></li>
+<li><a href="{% url 'show_group' group.id %}">Back to Group</a></li>
 {% endblock %}
 
 {% block content %}
@@ -37,7 +37,7 @@
         <tr>
             <td>
                 {% if perms.namer.change_network %}
-                <a href="{% url edit_network network.id %}">{{ network.network }}</a>
+                <a href="{% url 'edit_network' network.id %}">{{ network.network }}</a>
                 {% else %}
                 {{ computer.name }}
                 {% endif %}

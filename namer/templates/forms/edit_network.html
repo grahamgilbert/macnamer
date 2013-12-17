@@ -10,7 +10,7 @@
 <h1>Edit Network</h1>
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-    <form action="{% url edit_network network.id %}" method="post">{% csrf_token %}
+    <form action="{% url 'edit_network' network.id %}" method="post">{% csrf_token %}
 	
         <table>
 	
@@ -29,7 +29,7 @@
 	  </div>
 	  <div class="modal-footer">
 	    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-	    <a class="btn btn-danger" href="{% url namer.views.delete_network network.id %}">Delete Network</a>
+	    <a class="btn btn-danger" href="{% url 'namer.views.delete_network' network.id %}">Delete Network</a>
 	  </div>
 	</div>
 {% endblock %}
