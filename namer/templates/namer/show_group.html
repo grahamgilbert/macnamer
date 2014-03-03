@@ -49,7 +49,7 @@
                 {% endif %}
                 {% else %}
                 {% if perms.namer.change_computer %}
-                <a href="{% url edit_computer computer.id %}">{{ computer.name }}</a>
+                <a href="{% url 'edit_computer' computer.id %}">{{ computer.name }}</a>
                 {% else %}
                 {{ computer.name }}
                 {% endif %}
