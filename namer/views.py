@@ -194,7 +194,6 @@ def delete_network(request, network_id):
 def checkin(request):
     try:
         serial_num = request.POST['serial']
-        print request
     except:
         raise Http404
     try:
