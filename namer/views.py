@@ -15,33 +15,21 @@ from datetime import datetime
 from django.utils import simplejson
 import re
 
-# Create your views here.
 def next_name(group):
-    ##is there a prefix set? If so, get the highest number and add one and pre-populate the form with it.
+    # Start at 1, try to get a computer. If we fail, then the number is available.
+    counter = 1
     if group.prefix:
-        try:
-            the_computers = Computer.objects.filter(computergroup=group.id).order_by('-name')
-            maximum_name = 0
-            for a_computer in the_computers:
-                try:
-                    if int(a_computer.name) > int(maximum_name):
-                        maximum_name = a_computer.name
-                except:
-                    break
-        except:
-            maximum_name = 0
-        ##computer name
-        if maximum_name == 0:
-            the_value = maximum_name
-        else:
-            the_value = maximum_name
-        try:
-            initial_name = int(the_value)+1
-        except TypeError:
-            initial_name = ""
+        while True:
+            try:
+                computer = get_object_or_404(Computer, name=counter, computergroup=group.id)
+                counter += 1
+            except Http404:
+                break
+        return_name = counter    
     else:
-        initial_name = ""
-    return initial_name
+        return_name = ""
+    
+    return return_name
     
 @login_required 
 def index(request):
@@ -206,6 +194,7 @@ def delete_network(request, network_id):
 def checkin(request):
     try:
         serial_num = request.POST['serial']
+        print request
     except:
         raise Http404
     try:

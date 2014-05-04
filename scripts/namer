@@ -26,9 +26,9 @@ import shutil
 import math
 from Foundation import *
 
-#################################################################################################################
-##No Editing needed!
-#################################################################################################################
+###############################################################################
+## No Editing needed!
+###############################################################################
 
 BUNDLE_ID = 'com.grahamgilbert.macnamer'
 ##This was lifted verbatim from the Munki project - hope Greg doesn't mind!
@@ -91,7 +91,6 @@ else:
 serial = subprocess.Popen(the_command,shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate()[0]
 serial = re.sub(r'\s', '', serial)
 
-#the_command = "ifconfig | grep \"inet \" | grep -v 127.0.0.1 | cut -d\  -f2"
 the_command = "/sbin/ifconfig | grep 'inet ' | grep -v '127.0.0.1' | head -n1 | awk '{print $2}'"
 ip = subprocess.Popen(the_command,shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate()[0]
 ip = re.sub(r'\s', '', ip)
@@ -110,7 +109,7 @@ except URLError, e:
         print 'Error code: ', e.code
         os.unlink(pidfile)
 else:
-    #got the data from the server, time to get to work!
+    # got the data from the server, time to get to work!
     os.unlink(pidfile)
     data = response.read()
     data = json.loads(data)
@@ -120,11 +119,12 @@ else:
     length = data['length']
 
     if name:
-        ##there's a name there, now to see if we need to exit
+        # there's a name there, now to see if we need to exit
         theprocess = "scutil --get ComputerName"
         oldname = subprocess.Popen(theprocess,shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate()[0]
         oldname = oldname.strip()
         if prefix:
+            name = name.zfill(length)
             newname = prefix+' '+name
         else:
             newname = name
@@ -134,17 +134,17 @@ else:
         else:
             need_change = True
         if prefix:
-            #is a prefix set? if so, we need to pad the zeroes
+            # is a prefix set? if so, we need to pad the zeroes
             name = name.zfill(length)
-        #the hostname must be set
-        #if there's a prefix, add that to the name
-        #set the local hostname
+        # the hostname must be set
+        # if there's a prefix, add that to the name
+        # set the local hostname
         if prefix:
             localname = prefix.replace(' ', '-') + "-" + name.replace(' ', '-')
         else:
             localname = name.replace(' ', '-')
         
-        ##do we need to change the name?
+        # do we need to change the name?
         if need_change == True:
             localname=re.sub("[^0-9a-zA-Z\-]","",localname)
             theprocess = "scutil --set LocalHostName" + " " +localname
