@@ -17,7 +17,7 @@ Installation is simple - [install the package](https://github.com/grahamgilbert/
 MacNamer is divided into groups, and within each group are computers and networks. 
 
 ###Computer Numbers
-If you set a prefix for the group, and don't enter anything other than digits in the name field for the group, MacNamer will auto increment the number (e.g. enter ABC in the prefix field, and enter 1 as the first computer name). If you enter anything else in the name field, MacNamer won't auto increment the next computer's number.
+If you set a prefix for the group, MacNamer will auto increment the number - it for example, set ABC as the prefix and your first machine will be ABC 1.
 
 ###Networks
 If you assign a network to a group, any new request that comes from that network will be assigned the next available number (if you're using the auto naming functionality). If you don't wish Macs to be automatically added to MacNamer, don't assign any networks to a group.
