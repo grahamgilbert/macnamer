@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-## Copyright 2012 Graham Gilbert
+## Copyright 2014 Graham Gilbert
 ## Licensed under the Apache License, Version 2.0 (the "License");
 ## you may not use this file except in compliance with the License.
 ## You may obtain a copy of the License at
@@ -94,7 +94,8 @@ serial = re.sub(r'\s', '', serial)
 the_command = "/sbin/ifconfig | grep 'inet ' | grep -v '127.0.0.1' | head -n1 | awk '{print $2}'"
 ip = subprocess.Popen(the_command,shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate()[0]
 ip = re.sub(r'\s', '', ip)
-mydata=[('serial',serial),('ip',ip)] 
+key = pref('Key')
+mydata=[('serial',serial),('ip',ip),('key',key)] 
 mydata=urllib.urlencode(mydata)
 req = Request(theurl, mydata)
 try:
@@ -143,7 +144,7 @@ else:
             localname = prefix.replace(' ', '-') + "-" + name.replace(' ', '-')
         else:
             localname = name.replace(' ', '-')
-        
+
         # do we need to change the name?
         if need_change == True:
             localname=re.sub("[^0-9a-zA-Z\-]","",localname)
@@ -155,7 +156,7 @@ else:
             else:
                 theprocess = "scutil --set ComputerName" + " \"" +name + "\""
             p = subprocess.Popen(theprocess,shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate()[0]
-        
+
         ##if a domain is set, set the full hostname
         if domain:
             theprocess = "scutil --get HostName"

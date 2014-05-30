@@ -15,6 +15,14 @@ from datetime import datetime
 from django.utils import simplejson
 import re
 
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
 def next_name(group):
     # Start at 1, try to get a computer. If we fail, then the number is available.
     counter = 1
@@ -25,20 +33,20 @@ def next_name(group):
                 counter += 1
             except Http404:
                 break
-        return_name = counter    
+        return_name = counter
     else:
         return_name = ""
-    
+
     return return_name
-    
-@login_required 
+
+@login_required
 def index(request):
     #show table with computer groups
     groups = ComputerGroup.objects.all()
     c = {'user': request.user, 'groups':groups, }
-    return render_to_response('namer/index.html', c, context_instance=RequestContext(request)) 
-    
-    
+    return render_to_response('namer/index.html', c, context_instance=RequestContext(request))
+
+
 #new computer group
 @login_required
 @permission_required('namer.add_computergroup', login_url='/login/')
@@ -100,7 +108,7 @@ def new_computer(request, group_id):
 @permission_required('namer.change_computer', login_url='/login/')
 def edit_computer(request, computer_id):
     computer = get_object_or_404(Computer, pk=computer_id)
-    
+
     c = {}
     c.update(csrf(request))
     if request.method == 'POST':
@@ -127,7 +135,7 @@ def show_group(request, group_id):
             length = this_length
     c = { 'user': request.user, 'group':group, 'computers':computers, 'length':length, }
     return render_to_response('namer/show_group.html', c, context_instance=RequestContext(request))
-    
+
 @login_required
 @permission_required('namer.delete_computer', login_url='/login/')
 def delete_computer(request, computer_id):
@@ -160,7 +168,7 @@ def new_network(request, group_id):
 @permission_required('namer.change_network', login_url='/login/')
 def edit_network(request, network_id):
     network = get_object_or_404(Network, pk=network_id)
-    
+
     c = {}
     c.update(csrf(request))
     if request.method == 'POST':
@@ -181,7 +189,7 @@ def show_network(request, group_id):
     networks = group.network_set.all()
     c = { 'user': request.user, 'group':group, 'networks':networks, }
     return render_to_response('namer/show_network.html', c, context_instance=RequestContext(request))
-    
+
 @login_required
 @permission_required('namer.delete_network', login_url='/login/')
 def delete_network(request, network_id):
@@ -189,7 +197,7 @@ def delete_network(request, network_id):
     group = get_object_or_404(ComputerGroup, pk=network.computergroup.id)
     network.delete()
     return redirect('namer.views.show_network', group_id=group.id)
-    
+
 @csrf_exempt
 def checkin(request):
     try:
@@ -200,29 +208,35 @@ def checkin(request):
         ip = request.POST['ip']
     except:
         raise Http404
+
+    try:
+        key = request.POST['key']
+    except:
+        raise Http404
     try:
         #try to find the computer
         computer = get_object_or_404(Computer, serial__iexact=serial_num)
     except:
+        wan_ip = get_client_ip(request)
         ##we couldn't find the computer, get it's subnet out of the passed ip
         subnet = ip.rpartition('.')[0] + ".0"
         ##find if there are any subnets with this IP address
         try:
-            network = get_object_or_404(Network, network=subnet)
+            computergroup = get_object_or_404(ComputerGroup, key=key)
         except:
             raise Http404
         ##get the next name of from the group - if it's not blank carry on
-        new_name = next_name(network.computergroup)
+        new_name = next_name(computergroup)
         if new_name == "":
             raise Http404
         else:
             ##if there are, create a new computer in that group with the serial
-            computer = Computer(name=new_name, serial=serial_num, computergroup=network.computergroup)
+            computer = Computer(name=new_name, serial=serial_num, computergroup=computergroup)
             computer.save()
     computer.last_checkin = datetime.now()
     computer.save()
     group = computer.computergroup
-    
+
     computers = group.computer_set.all()
     ##need to get the longest number.
     length = 0
@@ -232,4 +246,3 @@ def checkin(request):
             length = this_length
     c ={'name':computer.name, 'prefix':group.prefix, 'domain':group.domain, 'length':length, }
     return HttpResponse(simplejson.dumps(c), mimetype="application/json")
-        

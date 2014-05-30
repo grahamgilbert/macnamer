@@ -28,6 +28,14 @@
 {% endblock %}
 
 {% block content %}
+<div class="row">
+    <div class="span12">
+        <h3>{{ group.name }}</h3>
+        Key: <code>{{ group.key }}</code>
+    </div>
+</div>
+<div class="row">
+  <div class="span12">
 <table class='computerlist table table-striped table-condensed'>
     <thead>
         <tr>
@@ -55,12 +63,13 @@
                 {% endif %}
                 {% endif %}
             </td>
-    
+
             <td>{{ computer.serial }}</td>
             <td>{{ computer.last_checkin }}</td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
-
+</div>
+</div>
 {% endblock %}
