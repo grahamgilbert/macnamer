@@ -129,11 +129,11 @@ else:
             newname = prefix+' '+name
         else:
             newname = name
-        if newname == oldname:
-            print 'No change to name, exiting'
-            need_change = False
-        else:
-            need_change = True
+        # if newname == oldname:
+        #     print 'No change to name, exiting'
+        #     need_change = False
+        # else:
+        #     need_change = True
         if prefix:
             # is a prefix set? if so, we need to pad the zeroes
             name = name.zfill(length)
@@ -144,26 +144,38 @@ else:
             localname = prefix.replace(' ', '-') + "-" + name.replace(' ', '-')
         else:
             localname = name.replace(' ', '-')
+        theprocess = "scutil --get LocalHostName"
+        oldname = subprocess.Popen(theprocess,shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate()[0]
 
-        # do we need to change the name?
-        if need_change == True:
-            localname=re.sub("[^0-9a-zA-Z\-]","",localname)
+        localname=re.sub("[^0-9a-zA-Z\-]","",localname)
+
+        if localname !=oldname:
             theprocess = "scutil --set LocalHostName" + " " +localname
             p = subprocess.Popen(theprocess,shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate()[0]
         #set the bonjour name
-            if prefix:
-                theprocess = "scutil --set ComputerName" + " \"" + prefix  + " " +name + "\""
-            else:
-                theprocess = "scutil --set ComputerName" + " \"" +name + "\""
+        if prefix:
+            desiredname = prefix + " " + name
+        else:
+            desiredname = name
+        theprocess = "scutil --get ComputerName"
+        oldname = subprocess.Popen(theprocess,shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate()[0]
+        if oldname != desiredname:
+            theprocess = "scutil --set ComputerName" + " \"" +name + "\""
             p = subprocess.Popen(theprocess,shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate()[0]
+        
+        
+            
 
         ##if a domain is set, set the full hostname
         if domain:
-            theprocess = "scutil --get HostName"
-            oldhostname = subprocess.Popen(theprocess,shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate()[0].strip()
-            if oldhostname == localname+"."+domain:
-                print "Hostname is the same, no need to change"
-            else:
-                theprocess = "scutil --set HostName" + " " +localname+"."+domain
-                p = subprocess.Popen(theprocess,shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate()[0]
+            newname = localname+"."+domain
+        else:
+            newname = localname+".local"
+        theprocess = "scutil --get HostName"
+        oldhostname = subprocess.Popen(theprocess,shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate()[0].strip()
+        if oldhostname == localname+"."+domain:
+            print "Hostname is the same, no need to change"
+        else:
+            theprocess = "scutil --set HostName" + " " +localname+"."+domain
+            p = subprocess.Popen(theprocess,shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate()[0]
         #we're done

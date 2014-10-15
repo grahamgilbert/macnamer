@@ -7,7 +7,7 @@ REVERSE_DOMAIN=com.grahamgilbert
 PAYLOAD=\
 			pack-script\
 			pack-Library-LaunchDaemons-com.grahamgilbert.macnamer.plist\
-            pack-script-postflight
+            pack-script-postinstall
 
 pack-script: l_usr_local
 		@sudo mkdir -p ${WORK_D}/usr/local/macnamer/
