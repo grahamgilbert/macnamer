@@ -160,7 +160,7 @@ else:
         theprocess = "scutil --get ComputerName"
         oldname = subprocess.Popen(theprocess,shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate()[0]
         if oldname != desiredname:
-            theprocess = "scutil --set ComputerName" + " \"" +name + "\""
+            theprocess = "scutil --set ComputerName" + " \"" +desiredname + "\""
             p = subprocess.Popen(theprocess,shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate()[0]
         
         
