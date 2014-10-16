@@ -176,6 +176,6 @@ else:
         if oldhostname == localname+"."+domain:
             print "Hostname is the same, no need to change"
         else:
-            theprocess = "scutil --set HostName" + " " +localname+"."+domain
+            theprocess = "scutil --set HostName" + " " +newname
             p = subprocess.Popen(theprocess,shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate()[0]
         #we're done
