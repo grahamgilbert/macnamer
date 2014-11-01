@@ -6,6 +6,7 @@ I'm rather OCD about the names of the Macs I look after. I like them to follow t
 
 ##Server installation
 * [Ubuntu](https://github.com/grahamgilbert/macnamer/wiki/Installation-on-Ubuntu)
+* [Docker](https://github.com/macadmins/macnamer)
 * OS X
 
 ##Deploying to clients
